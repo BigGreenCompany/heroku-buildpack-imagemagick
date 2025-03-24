@@ -39,6 +39,10 @@ if [ ! -f $CACHE_FILE ]; then
   export LDFLAGS="-L$INSTALL_DIR/lib"
   ./configure --prefix=$INSTALL_DIR --with-quantum-depth=16 --disable-hdri
   make && make install
+  if [ $? -ne 0 ]; then
+    echo "Error: Failed to build ImageMagick." | indent
+    exit 1
+  fi
   cd ..
   rm -rf $IMAGE_MAGICK_DIR
 
